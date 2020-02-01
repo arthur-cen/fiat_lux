@@ -39,6 +39,8 @@ export default class GameScene extends Phaser.Scene {
     }
 
     update(time, delta) {
+        const speed = 175;
+        // const prevVelocity = player.body.velocity.clone();
         // Stop any previous movement from the last frame
         this.player.body.setVelocity(0);
       
@@ -49,14 +51,14 @@ export default class GameScene extends Phaser.Scene {
           this.player.body.setVelocityX(100);
         }
       
-        // // Vertical movement
-        // if (this.cursors.up.isDown) {
-        //   this.player.body.setVelocityY(-100);
-        // } else if (this.cursors.down.isDown) {
-        //   this.player.body.setVelocityY(100);
-        // }
+        // Vertical movement
+        if (this.cursors.up.isDown) {
+          this.player.body.setVelocityY(-100);
+        } else if (this.cursors.down.isDown) {
+          this.player.body.setVelocityY(100);
+        }
       
         // // Normalize and scale the velocity so that player can't move faster along a diagonal
-        // this.player.body.velocity.normalize().scale(speed);
+        this.player.body.velocity.normalize().scale(speed);
     }  
 }
