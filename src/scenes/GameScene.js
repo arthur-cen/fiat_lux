@@ -20,7 +20,8 @@ export default class GameScene extends Phaser.Scene {
         const map = this.make.tilemap({ key: "map" });
         const tileset = map.addTilesetImage("Dungeon_Tileset", "tiles");
 
-        console.log(map);
+        
+
         // Parameters: layer name (or index) from Tiled, tileset, x, y
         const belowLayer = map.createStaticLayer("Below Player", tileset, 0, 0);
         const worldLayer = map.createStaticLayer("World", tileset, 0, 0);
@@ -31,11 +32,29 @@ export default class GameScene extends Phaser.Scene {
         // aboveLayer.setDepth(10);
         //Add player to the game
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn Point");
-
+        
         this.player = this.physics.add
-            .sprite(spawnPoint.x, spawnPoint.y, "atlas", "misa-front")
-            .setSize(30, 40)
-            .setOffset(0, 24);
+        .sprite(spawnPoint.x, spawnPoint.y, "atlas", "misa-front")
+        .setSize(30, 40)
+        .setOffset(0, 24);
+        
+        const darkness = this.add.graphics();
+        darkness.fillStyle(0x000000, 1);
+        darkness.fillRect(0, 0, map.width * map.tileWidth, map.height * map.tileHeight);
+        darkness.setDepth(10);
+
+       //make a circle
+       this.spotLight = this.make.graphics();
+       //  Create a hash shape Graphics object
+       this.spotLight.fillStyle(0xffffff);
+
+       //  You have to begin a path for a Geometry mask to work
+       this.spotLight.beginPath();
+
+       this.spotLight.fillCircle(0, 0, 64);
+
+       darkness.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotLight);
+       darkness.mask.invertAlpha = true
 
         //create collision between player and the world
         this.physics.add.collider(this.player, worldLayer);
@@ -121,7 +140,8 @@ export default class GameScene extends Phaser.Scene {
         const prevVelocity = this.player.body.velocity.clone();
         // Stop any previous movement from the last frame
         this.player.body.setVelocity(0);
-      
+        this.spotLight.x = this.player.x;
+        this.spotLight.y = this.player.y;
         // Horizontal movement
         if (this.cursors.left.isDown) {
           this.player.body.setVelocityX(-speed);
