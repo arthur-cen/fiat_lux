@@ -48,6 +48,12 @@ export default class GameScene extends Phaser.Scene {
        this.spotLight = this.make.graphics();
        //  Create a hash shape Graphics object
        this.spotLight.fillStyle(0xffffff);
+       this.tweens.add({
+         targets: this.spotLight,
+         alpha: {value: 0.5, duration: 3000, ease: 'Power1'},
+         yoyo:true,
+         loop: -1
+       })
 
        //  You have to begin a path for a Geometry mask to work
        this.spotLight.beginPath();
