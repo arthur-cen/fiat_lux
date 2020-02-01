@@ -8,5 +8,8 @@ export default {
         arcade: {
           gravity: { y: 0 } // Top down game, so no gravity
         }
-      }
+      },
+    audio: {
+      disableWebAudio: true
+    }
   };
