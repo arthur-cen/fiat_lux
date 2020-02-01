@@ -1,7 +1,7 @@
 import 'phaser';
 // import logoImg from "../assets/logo.png";
-import tiles from "../assets/tilesets/tuxmon-sample-32px-extruded.png";
-import townmap from "../assets/tilemaps/tuxemon-town.json";
+import tiles from "../assets/tilesets/Dungeon_Tileset.png";
+import townmap from "../assets/tilemaps/level1.json";
 import atlas from "../assets/atlas/atlas.png"
 import atlasJSON from "../assets/atlas/atlas.json"
 export default class GameScene extends Phaser.Scene {
@@ -18,20 +18,50 @@ export default class GameScene extends Phaser.Scene {
     create() {
         //Load map and the tileset
         const map = this.make.tilemap({ key: "map" });
-        const tileset = map.addTilesetImage("tuxmon-sample-32px-extruded", "tiles");
+        const tileset = map.addTilesetImage("Dungeon_Tileset", "tiles");
+
+        
 
         // Parameters: layer name (or index) from Tiled, tileset, x, y
+        const dec = map.createStaticLayer("decoration", tileset, 0, 0);
         const belowLayer = map.createStaticLayer("Below Player", tileset, 0, 0);
         const worldLayer = map.createStaticLayer("World", tileset, 0, 0);
-        const aboveLayer = map.createStaticLayer("Above Player", tileset, 0, 0);
+        
+        
+        // const aboveLayer = map.createStaticLayer("Above Player", tileset, 0, 0);
         //set a layer that sits on top of the player
-        aboveLayer.setDepth(10);
-
+        // aboveLayer.setDepth(10);
         //Add player to the game
+        const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn Point");
+        
         this.player = this.physics.add
-            .sprite(400, 350, "atlas", "misa-front")
-            .setSize(30, 40)
-            .setOffset(0, 24);
+        .sprite(spawnPoint.x, spawnPoint.y, "atlas", "misa-front")
+        .setSize(30, 30)
+        .setOffset(0, 24);
+        
+        const darkness = this.add.graphics();
+        darkness.fillStyle(0x000000, 1);
+        darkness.fillRect(0, 0, map.width * map.tileWidth, map.height * map.tileHeight);
+        darkness.setDepth(10);
+
+       //make a circle
+       this.spotLight = this.make.graphics();
+       //  Create a hash shape Graphics object
+       this.spotLight.fillStyle(0xffffff);
+       this.tweens.add({
+         targets: this.spotLight,
+         alpha: {value: 0.5, duration: 3000, ease: 'Power1'},
+         yoyo:true,
+         loop: -1
+       })
+
+       //  You have to begin a path for a Geometry mask to work
+       this.spotLight.beginPath();
+
+       this.spotLight.fillCircle(0, 0, 64);
+
+       darkness.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotLight);
+       darkness.mask.invertAlpha = true
 
         //create collision between player and the world
         this.physics.add.collider(this.player, worldLayer);
@@ -91,7 +121,7 @@ export default class GameScene extends Phaser.Scene {
 
         //setup collison with world layer
         worldLayer.setCollisionBetween(12, 44);
-        worldLayer.setCollisionByProperty({ collides: true });
+        worldLayer.setCollisionByProperty({ collide: true });
         
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -117,7 +147,8 @@ export default class GameScene extends Phaser.Scene {
         const prevVelocity = this.player.body.velocity.clone();
         // Stop any previous movement from the last frame
         this.player.body.setVelocity(0);
-      
+        this.spotLight.x = this.player.x;
+        this.spotLight.y = this.player.y;
         // Horizontal movement
         if (this.cursors.left.isDown) {
           this.player.body.setVelocityX(-speed);
