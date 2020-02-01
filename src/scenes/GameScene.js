@@ -23,6 +23,7 @@ export default class GameScene extends Phaser.Scene {
         
 
         // Parameters: layer name (or index) from Tiled, tileset, x, y
+        const dec = map.createStaticLayer("decoration", tileset, 0, 0);
         const belowLayer = map.createStaticLayer("Below Player", tileset, 0, 0);
         const worldLayer = map.createStaticLayer("World", tileset, 0, 0);
         
@@ -35,7 +36,7 @@ export default class GameScene extends Phaser.Scene {
         
         this.player = this.physics.add
         .sprite(spawnPoint.x, spawnPoint.y, "atlas", "misa-front")
-        .setSize(30, 40)
+        .setSize(30, 30)
         .setOffset(0, 24);
         
         const darkness = this.add.graphics();

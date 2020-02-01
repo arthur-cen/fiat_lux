@@ -1,8 +1,8 @@
 export default {
     type: Phaser.AUTO,
     parent: "phaser-example",
-    width: 800, // Canvas width in pixels
-    height: 600, // Canvas height in pixels
+    width: 1200, // Canvas width in pixels
+    height: 800, // Canvas height in pixels
     physics: {
         default: "arcade",
         arcade: {
