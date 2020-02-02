@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="120" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="277">
+<map version="1.2" tiledversion="1.3.2" orientation="orthogonal" renderorder="right-down" compressionlevel="-1" width="200" height="120" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="311">
  <editorsettings>
-  <export target="level1.json" format="json"/>
+  <export target="." format="json"/>
  </editorsettings>
  <properties>
   <property name="edges" value="clamped"/>
@@ -98,7 +98,7 @@
   </tile>
   <tile id="17" terrain="0,0,0,0">
    <properties>
-    <property name="collides" type="bool" value="false"/>
+    <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="18" terrain="0,,0,">
@@ -1984,8 +1984,72 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="8" name="lamp">
+  <object id="290" name="lamp" x="257" y="1147">
+   <point/>
+  </object>
+  <object id="291" name="lamp" x="260.5" y="1845.5">
+   <point/>
+  </object>
+  <object id="292" name="lamp" x="4990.67" y="1146">
+   <point/>
+  </object>
+  <object id="293" name="lamp" x="4270.5" y="1146.5">
+   <point/>
+  </object>
+  <object id="295" name="lamp" x="4065.33" y="2281.33">
+   <point/>
+  </object>
+  <object id="296" name="lamp" x="3604" y="3257.33">
+   <point/>
+  </object>
+  <object id="297" name="lamp" x="1924" y="3262.67">
+   <point/>
+  </object>
+  <object id="298" name="lamp" x="1218.67" y="2862.67">
+   <point/>
+  </object>
+  <object id="299" name="lamp" x="1207.5" y="2147">
+   <point/>
+  </object>
+  <object id="300" name="lamp" x="1215" y="1161">
+   <point/>
+  </object>
+  <object id="301" name="lamp" x="1929.33" y="768.667">
+   <point/>
+  </object>
+  <object id="302" name="lamp" x="170" y="2874">
+   <point/>
+  </object>
+  <object id="303" name="lamp" x="1928" y="2079">
+   <point/>
+  </object>
+  <object id="304" name="lamp" x="2627" y="1788">
+   <point/>
+  </object>
+  <object id="305" name="lamp" x="3192" y="769">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="ghost">
+  <object id="306" name="ghost" x="158.667" y="2528">
+   <point/>
+  </object>
+  <object id="307" name="ghost" x="907" y="615.333">
+   <point/>
+  </object>
+  <object id="308" name="ghost" x="3298" y="1584">
+   <point/>
+  </object>
+  <object id="309" name="ghost" x="3520" y="369">
+   <point/>
+  </object>
+ </objectgroup>
  <objectgroup id="4" name="Objects">
   <object id="275" name="Spawn Point" x="260" y="665">
+   <point/>
+  </object>
+  <object id="310" name="End Point" x="5420.5" y="1153.5">
    <point/>
   </object>
  </objectgroup>
