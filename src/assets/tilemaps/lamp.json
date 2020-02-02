@@ -4,100 +4,100 @@
 			"frame": {
 				"x": 1,
 				"y": 1,
-				"w": 120,
-				"h": 196
+				"w": 19,
+				"h": 31
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 120,
-				"h": 196
+				"w": 19,
+				"h": 31
 			},
 			"sourceSize": {
-				"w": 120,
-				"h": 196
+				"w": 19,
+				"h": 31
 			}
 		},
 		"lamp2.png": {
 			"frame": {
-				"x": 123,
+				"x": 22,
 				"y": 1,
-				"w": 120,
-				"h": 196
+				"w": 19,
+				"h": 31
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 120,
-				"h": 196
+				"w": 19,
+				"h": 31
 			},
 			"sourceSize": {
-				"w": 120,
-				"h": 196
+				"w": 19,
+				"h": 31
 			}
 		},
 		"lamp3.png": {
 			"frame": {
-				"x": 245,
+				"x": 43,
 				"y": 1,
-				"w": 120,
-				"h": 196
+				"w": 19,
+				"h": 31
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 120,
-				"h": 196
+				"w": 19,
+				"h": 31
 			},
 			"sourceSize": {
-				"w": 120,
-				"h": 196
+				"w": 19,
+				"h": 31
 			}
 		},
 		"lamp4.png": {
 			"frame": {
 				"x": 1,
-				"y": 199,
-				"w": 120,
-				"h": 196
+				"y": 34,
+				"w": 19,
+				"h": 31
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 120,
-				"h": 196
+				"w": 19,
+				"h": 31
 			},
 			"sourceSize": {
-				"w": 120,
-				"h": 196
+				"w": 19,
+				"h": 31
 			}
 		},
 		"lamp5.png": {
 			"frame": {
-				"x": 123,
-				"y": 199,
-				"w": 120,
-				"h": 196
+				"x": 22,
+				"y": 34,
+				"w": 19,
+				"h": 31
 			},
 			"rotated": false,
 			"trimmed": false,
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 120,
-				"h": 196
+				"w": 19,
+				"h": 31
 			},
 			"sourceSize": {
-				"w": 120,
-				"h": 196
+				"w": 19,
+				"h": 31
 			}
 		}
 	},
@@ -107,8 +107,8 @@
 		"image": "spritesheet.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 366,
-			"h": 396
+			"w": 63,
+			"h": 66
 		},
 		"scale": "1"
 	}
