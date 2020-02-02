@@ -127,19 +127,20 @@ export default class GameScene extends Phaser.Scene {
         .setSize(19, 31)
         .setOffset(0, 24);
 
-        // const anims = this.anims;
-        // // creating light animation
-        // anims.create({
-        //     key: "misa-left-walk",
-        //     frames: anims.generateFrameNames("atlas", {
-        //       prefix: "misa-left-walk.",
-        //       start: 0,
-        //       end: 3,
-        //       zeroPad: 3
-        //     }),
-        //     frameRate: 10,
-        //     repeat: -1
-        //   });
+        // creating light animation
+        anims.create({
+            key: "light",
+            frames: lampAnims.generateFrameNames("light", {
+              prefix: "lamp",
+              start: 1,
+              end: 4,
+              suffix: ".png",
+              zeroPad: 0
+            }),
+            frameRate: 10,
+            repeat: -1
+          });
+          myLamp.anims.play("light", true);
 
         //create a camera that follows the player
         const camera = this.cameras.main;
