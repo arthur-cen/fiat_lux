@@ -135,7 +135,7 @@ export default class GameScene extends Phaser.Scene {
             frameRate: 10,
             repeat: -1
           });
-          myLamp.anims.play("light", true);
+          //myLamp.anims.play("light", true);
 
         //create a camera that follows the player
         const camera = this.cameras.main;
@@ -179,6 +179,8 @@ export default class GameScene extends Phaser.Scene {
         } else if (this.cursors.right.isDown) {
             this.player.body.setVelocityX(speed);
         }
+
+        this.playLamps();
       
         // Vertical movement
         if (this.cursors.up.isDown) {
@@ -212,11 +214,11 @@ export default class GameScene extends Phaser.Scene {
         key: "light",
         frame: "lamp1.png"
       })
-
-      
-      
-      
-      
+      for (let i = 0; i < lampPoints.length; i++) {
+        lampPoints[i].setData("on", true);
+      }
+      console.log(this.map);
+      // console.log(lampPoints);
       this.lampPoints = lampPoints;
     }
 
@@ -226,5 +228,13 @@ export default class GameScene extends Phaser.Scene {
 
       console.log('got lamp');
       console.log(lamp);
+    }
+
+    playLamps() {
+      for (let i = 0; i < lampPoints.length; i++) {
+        if (lampPoints[i].on) {
+          lampPoints.anims.play("light", true);
+        }
+      }
     }
 }
