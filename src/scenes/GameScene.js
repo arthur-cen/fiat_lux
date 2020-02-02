@@ -38,6 +38,12 @@ export default class GameScene extends Phaser.Scene {
         // aboveLayer.setDepth(10);
         //Add player to the game
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn Point");
+        const ending = map.findObject("Objects", obj => obj.name === "End Point");
+
+        this.ending = this.physics.add
+        .sprite(ending.x-300, ending.y)
+        .setSize(600, 600)
+        .setOffset(0, 24);
         
         this.player = this.physics.add
         .sprite(spawnPoint.x, spawnPoint.y, "atlas", "misa-front")
@@ -66,7 +72,7 @@ export default class GameScene extends Phaser.Scene {
        this.spotLight.fillCircle(0, 0, 64);
 
        darkness.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotLight);
-       darkness.mask.invertAlpha = false
+       darkness.mask.invertAlpha = true
 
         //create collision between player and the world
         this.physics.add.collider(this.player, worldLayer);
@@ -120,7 +126,11 @@ export default class GameScene extends Phaser.Scene {
 
         //create lamps
         this.createLamps();
-        this.physics.add.collider(this.player, this.lampPoints, this.handleLampDiscovery);
+        this.physics.add
+        this.physics.add.collider(this.player, this.lampPoints, (player, lamp) => this.handleLampDiscovery(player, lamp));
+       
+        this.physics.add.collider(this.player, this.ending, () => this.scene.start("End"));
+
         // creating light animation
         anims.create({
             key: "light",
@@ -179,7 +189,7 @@ export default class GameScene extends Phaser.Scene {
             this.player.body.setVelocityX(speed);
         }
 
-        this.playLamps();
+        //this.playLamps();
       
         // Vertical movement
         if (this.cursors.up.isDown) {
@@ -213,11 +223,11 @@ export default class GameScene extends Phaser.Scene {
         key: "light",
         frame: "lamp1.png"
       })
-      this.physics.world.enable(lampPoints);
       for (let i = 0; i < lampPoints.length; i++) {
         lampPoints[i].setData("on", true);
-        lampPoints[i].body.setImmovable();
       }
+      console.log(this.map);
+      // console.log(lampPoints);
       this.lampPoints = lampPoints;
     }
 
@@ -230,9 +240,9 @@ export default class GameScene extends Phaser.Scene {
     }
 
     playLamps() {
-      for (let i = 0; i < this.lampPoints.length; i++) {
-        if (this.lampPoints[i].getData('on')) {
-          this.lampPoints[i].anims.play("light", true);
+      for (let i = 0; i < lampPoints.length; i++) {
+        if (lampPoints[i].on) {
+          lampPoints.anims.play("light", true);
         }
       }
     }
