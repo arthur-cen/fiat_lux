@@ -16,7 +16,16 @@ export default class GameScene extends Phaser.Scene {
         this.load.tilemapTiledJSON("map", townmap);
         this.load.atlas("atlas", atlas, atlasJSON);
         this.load.atlas("light", light, lightJSON);
+        this.load.audio('fix', [
+          require("../assets/audio/fixing.ogg"),
+          require("../assets/audio/fixing.mp3")
+        ]);
       }
+    playMusic() {
+        var music = this.sound.add('fix');
+        music.play();
+        music.loop = false;
+    }
       
     create() {
         //Load map and the tileset
@@ -237,6 +246,7 @@ export default class GameScene extends Phaser.Scene {
 
     handleLampDiscovery(player, lamp) {
       if (!lamp.tweenPlaying) {
+        this.playMusic();
         lamp.tweenPlaying = true;
         let newSpotLight = this.make.graphics();
         //  Create a hash shape Graphics object
