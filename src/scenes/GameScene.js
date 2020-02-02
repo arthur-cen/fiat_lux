@@ -49,9 +49,6 @@ export default class GameScene extends Phaser.Scene {
         darkness.fillRect(0, 0, map.width * map.tileWidth, map.height * map.tileHeight);
         darkness.setDepth(10);
 
-        //create lamps
-        this.createLamps();
-
        //make a circle
        this.spotLight = this.make.graphics();
        //  Create a hash shape Graphics object
@@ -121,12 +118,10 @@ export default class GameScene extends Phaser.Scene {
             repeat: -1
           });
 
-        const lamp = map.findObject("lamp", obj => obj.name === "lamp");
-        let myLamp = this.physics.add
-        .sprite(spawnPoint.x, spawnPoint.y, "light", "lamp1.png")
-        .setSize(19, 31)
-        .setOffset(0, 24);
-
+        //create lamps
+        this.createLamps();
+        this.physics.add
+        this.physics.add.collider(this.player, this.lampPoints, (player, lamp) => this.handleLampDiscovery(player, lamp));
         // creating light animation
         anims.create({
             key: "light",
@@ -211,13 +206,25 @@ export default class GameScene extends Phaser.Scene {
         this.player.body.velocity.normalize().scale(speed);
     }  
 
-    createLamps () {
+    createLamps() {
       const lampPoints = this.map.createFromObjects("lamp", "lamp", {
         //Sprite Config here
         key: "light",
         frame: "lamp1.png"
       })
-      console.log(this.map);
-      // console.log(lampPoints);
+
+      
+      
+      
+      
+      this.lampPoints = lampPoints;
+    }
+
+    handleLampDiscovery(player, lamp) {
+      console.log('got player')
+      console.log(player)
+
+      console.log('got lamp');
+      console.log(lamp);
     }
 }
