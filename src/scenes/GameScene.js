@@ -130,7 +130,7 @@ export default class GameScene extends Phaser.Scene {
         // creating light animation
         anims.create({
             key: "light",
-            frames: lampAnims.generateFrameNames("light", {
+            frames: anims.generateFrameNames("light", {
               prefix: "lamp",
               start: 1,
               end: 4,
@@ -217,7 +217,7 @@ export default class GameScene extends Phaser.Scene {
         key: "light",
         frame: "lamp1.png"
       })
-      // console.log(this.map);
+      console.log(this.map);
       // console.log(lampPoints);
     }
 }
