@@ -41,6 +41,7 @@ export default class GameScene extends Phaser.Scene {
         const belowLayer = map.createStaticLayer("Below Player", tileset, 0, 0);
         const worldLayer = map.createStaticLayer("World", tileset, 0, 0);
         
+        dec.setDepth(10)
         
         // const aboveLayer = map.createStaticLayer("Above Player", tileset, 0, 0);
         //set a layer that sits on top of the player
@@ -56,8 +57,10 @@ export default class GameScene extends Phaser.Scene {
         
         this.player = this.physics.add
         .sprite(spawnPoint.x, spawnPoint.y, "atlas", "misa-front")
-        .setSize(30, 30)
-        .setOffset(0, 24);
+        .setSize(15, 25)
+        .setOffset(0, 24)
+        .setDepth(11)
+        .setOrigin(0.5, 0.5)
         
         const darkness = this.add.graphics();
         darkness.fillStyle(0x000000, 1);
@@ -236,8 +239,11 @@ export default class GameScene extends Phaser.Scene {
         key: "light",
         frame: "lamp1.png"
       })
+      this.physics.world.enable(lampPoints);
       for (let i = 0; i < lampPoints.length; i++) {
         lampPoints[i].setData("on", true);
+        lampPoints[i].body.setImmovable();
+        lampPoints[i].body.setSize(10,20);
       }
       console.log(this.map);
       // console.log(lampPoints);
