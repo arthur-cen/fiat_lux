@@ -55,7 +55,7 @@ export default class StartScene extends Phaser.Scene {
             });
 
         let myLamp = this.physics.add
-        .sprite(150,200, "light", "lamp2.png")
+        .sprite(150,200, "light")
         .setSize(190, 310)
         .setOffset(0, 0);
 
@@ -78,7 +78,7 @@ export default class StartScene extends Phaser.Scene {
 
 
         // title
-        this.add.text(350, 100, 'Flat_lux', {font: "78px Arial", fill: "white"});
+        this.add.text(350, 100, 'Flat lux', {font: "78px Arial", fill: "white"});
         this.add.text(350, 200, 'A journey on light.', {font: "36px Arial", fill: "yellow"});
 
         // start button

@@ -50,7 +50,7 @@ export default class GameScene extends Phaser.Scene {
         const ending = map.findObject("Objects", obj => obj.name === "End Point");
 
         this.ending = this.physics.add
-        .sprite(ending.x-300, ending.y)
+        .sprite(ending.x-300, ending.y-300)
         .setSize(600, 600)
         .setOffset(0, 24);
         
