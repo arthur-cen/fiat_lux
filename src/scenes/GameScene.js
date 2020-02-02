@@ -120,8 +120,7 @@ export default class GameScene extends Phaser.Scene {
 
         //create lamps
         this.createLamps();
-        this.physics.add
-        this.physics.add.collider(this.player, this.lampPoints, (player, lamp) => this.handleLampDiscovery(player, lamp));
+        this.physics.add.collider(this.player, this.lampPoints, this.handleLampDiscovery);
         // creating light animation
         anims.create({
             key: "light",
@@ -214,11 +213,11 @@ export default class GameScene extends Phaser.Scene {
         key: "light",
         frame: "lamp1.png"
       })
+      this.physics.world.enable(lampPoints);
       for (let i = 0; i < lampPoints.length; i++) {
         lampPoints[i].setData("on", true);
+        lampPoints[i].body.setImmovable();
       }
-      console.log(this.map);
-      // console.log(lampPoints);
       this.lampPoints = lampPoints;
     }
 
@@ -231,9 +230,9 @@ export default class GameScene extends Phaser.Scene {
     }
 
     playLamps() {
-      for (let i = 0; i < lampPoints.length; i++) {
-        if (lampPoints[i].on) {
-          lampPoints.anims.play("light", true);
+      for (let i = 0; i < this.lampPoints.length; i++) {
+        if (this.lampPoints[i].getData('on')) {
+          this.lampPoints[i].anims.play("light", true);
         }
       }
     }
