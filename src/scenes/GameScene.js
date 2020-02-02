@@ -55,6 +55,8 @@ export default class GameScene extends Phaser.Scene {
         darkness.fillRect(0, 0, map.width * map.tileWidth, map.height * map.tileHeight);
         darkness.setDepth(10);
 
+        this.darkness = darkness;
+
        //make a circle
        this.spotLight = this.make.graphics();
        //  Create a hash shape Graphics object
@@ -62,6 +64,8 @@ export default class GameScene extends Phaser.Scene {
        this.tweens.add({
          targets: this.spotLight,
          alpha: {value: 0.5, duration: 3000, ease: 'Power1'},
+         scaleX: {value: 1.5, duration: 3000, ease: 'Power1'},
+         scaleY: {value: 1.5, duration: 3000, ease: 'Power1'},
          yoyo:true,
          loop: -1
        })
@@ -126,7 +130,7 @@ export default class GameScene extends Phaser.Scene {
 
         //create lamps
         this.createLamps();
-        this.physics.add
+
         this.physics.add.collider(this.player, this.lampPoints, (player, lamp) => this.handleLampDiscovery(player, lamp));
        
         this.physics.add.collider(this.player, this.ending, () => this.scene.start("End"));
@@ -232,11 +236,30 @@ export default class GameScene extends Phaser.Scene {
     }
 
     handleLampDiscovery(player, lamp) {
-      console.log('got player')
-      console.log(player)
-
-      console.log('got lamp');
-      console.log(lamp);
+      if (!lamp.tweenPlaying) {
+        lamp.tweenPlaying = true;
+        let newSpotLight = this.make.graphics();
+        //  Create a hash shape Graphics object
+        newSpotLight.fillStyle(0xffffff);
+        newSpotLight.beginPath();
+        newSpotLight.fillCircle(0, 0, 64);
+  
+        this.darkness.setMask(new Phaser.Display.Masks.BitmapMask(this, newSpotLight));
+        this.darkness.mask.invertAlpha = true
+        newSpotLight.x = lamp.x;
+        newSpotLight.y = lamp.y;
+        this.tweens.add({
+          targets: newSpotLight,
+          scaleX: {value: 10, duration: 2000, hold: 3000, ease: 'Power1'},
+          scaleY: {value: 10, duration: 2000, hold: 3000, ease: 'Power1'},
+          yoyo: true,
+          onComplete: () => {
+            this.darkness.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotLight);
+            this.darkness.mask.invertAlpha = true
+            lamp.tweenPlaying = false;
+          }
+        })
+      }
     }
 
     playLamps() {
