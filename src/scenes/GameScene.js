@@ -22,6 +22,8 @@ export default class GameScene extends Phaser.Scene {
         //Load map and the tileset
         const map = this.make.tilemap({ key: "map" });
         const tileset = map.addTilesetImage("Dungeon_Tileset", "tiles");
+        //store the map
+        this.map = map;
 
         
 
@@ -46,6 +48,9 @@ export default class GameScene extends Phaser.Scene {
         darkness.fillStyle(0x000000, 1);
         darkness.fillRect(0, 0, map.width * map.tileWidth, map.height * map.tileHeight);
         darkness.setDepth(10);
+
+        //create lamps
+        this.createLamps();
 
        //make a circle
        this.spotLight = this.make.graphics();
@@ -204,4 +209,14 @@ export default class GameScene extends Phaser.Scene {
         // // Normalize and scale the velocity so that player can't move faster along a diagonal
         this.player.body.velocity.normalize().scale(speed);
     }  
+
+    createLamps () {
+      const lampPoints = this.map.createFromObjects("lamp", "lamp", {
+        //Sprite Config here
+        key: "light",
+        frame: "lamp1.png"
+      })
+      // console.log(this.map);
+      // console.log(lampPoints);
+    }
 }
