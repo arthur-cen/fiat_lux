@@ -3,6 +3,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
+var MAIN = path.resolve(__dirname, '../');
+
 module.exports = {
   mode: "development",
   devtool: "eval-source-map",
@@ -22,12 +24,17 @@ module.exports = {
       {
         test: /\.(gif|png|jpe?g|svg|xml)$/i,
         use: "file-loader"
+      },
+      {
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        include: MAIN,
+        loader: 'file-loader'
       }
     ]
   },
   plugins: [
     new CleanWebpackPlugin({
-      root: path.resolve(__dirname, "../")
+      root: path.resolve(__dirname, MAIN)
     }),
     new webpack.DefinePlugin({
       CANVAS_RENDERER: JSON.stringify(true),
