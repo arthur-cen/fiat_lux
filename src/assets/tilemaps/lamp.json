@@ -1,6 +1,6 @@
 {
 	"frames": {
-		"lamp_original_01.png": {
+		"lamp1.png": {
 			"frame": {
 				"x": 1,
 				"y": 1,
@@ -20,7 +20,7 @@
 				"h": 196
 			}
 		},
-		"lamp_original_02.png": {
+		"lamp2.png": {
 			"frame": {
 				"x": 123,
 				"y": 1,
@@ -40,7 +40,7 @@
 				"h": 196
 			}
 		},
-		"lamp_original_03.png": {
+		"lamp3.png": {
 			"frame": {
 				"x": 245,
 				"y": 1,
@@ -60,7 +60,7 @@
 				"h": 196
 			}
 		},
-		"lamp_original_04.png": {
+		"lamp4.png": {
 			"frame": {
 				"x": 1,
 				"y": 199,
@@ -80,7 +80,7 @@
 				"h": 196
 			}
 		},
-		"lamp_original_05.png": {
+		"lamp5.png": {
 			"frame": {
 				"x": 123,
 				"y": 199,
