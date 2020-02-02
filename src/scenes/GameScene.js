@@ -240,8 +240,8 @@ export default class GameScene extends Phaser.Scene {
         newSpotLight.y = lamp.y;
         this.tweens.add({
           targets: newSpotLight,
-          scaleX: {value: 10, duration: 2000, hold: 3000, ease: 'Power1'},
-          scaleY: {value: 10, duration: 2000, hold: 3000, ease: 'Power1'},
+          scaleX: {value: 20, duration: 2000, hold: 3000, ease: 'Power1'},
+          scaleY: {value: 20, duration: 2000, hold: 3000, ease: 'Power1'},
           yoyo: true,
           onComplete: () => {
             this.darkness.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotLight);
