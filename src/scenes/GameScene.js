@@ -49,6 +49,8 @@ export default class GameScene extends Phaser.Scene {
         darkness.fillRect(0, 0, map.width * map.tileWidth, map.height * map.tileHeight);
         darkness.setDepth(10);
 
+        this.darkness = darkness;
+
        //make a circle
        this.spotLight = this.make.graphics();
        //  Create a hash shape Graphics object
@@ -66,7 +68,7 @@ export default class GameScene extends Phaser.Scene {
        this.spotLight.fillCircle(0, 0, 64);
 
        darkness.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotLight);
-       darkness.mask.invertAlpha = false
+       darkness.mask.invertAlpha = true
 
         //create collision between player and the world
         this.physics.add.collider(this.player, worldLayer);
@@ -120,7 +122,7 @@ export default class GameScene extends Phaser.Scene {
 
         //create lamps
         this.createLamps();
-        this.physics.add.collider(this.player, this.lampPoints, this.handleLampDiscovery);
+        this.physics.add.collider(this.player, this.lampPoints, (player, lamp) => this.handleLampDiscovery(player, lamp));
         // creating light animation
         anims.create({
             key: "light",
@@ -222,11 +224,24 @@ export default class GameScene extends Phaser.Scene {
     }
 
     handleLampDiscovery(player, lamp) {
-      console.log('got player')
-      console.log(player)
+      let newSpotLight = this.make.graphics();
+      //  Create a hash shape Graphics object
+      newSpotLight.fillStyle(0xffffff);
+      newSpotLight.beginPath();
+      newSpotLight.fillCircle(0, 0, 64);
+      this.darkness.mask = new Phaser.Display.Masks.BitmapMask(this, newSpotLight);
+      this.darkness.mask.invertAlpha = true
 
-      console.log('got lamp');
-      console.log(lamp);
+      this.tweens.add({
+        targets: newSpotLight,
+        scaleX: {value: 2, duration: 1000, hold: 1000, ease: 'Power1'},
+        scaleY: {value: 2, duration: 1000, hold: 1000, ease: 'Power1'},
+        yoyo: true,
+        onComplete: () => {
+          this.darkness.mask = new Phaser.Display.Masks.BitmapMask(this, this.spotLight);
+          this.darkness.mask.invertAlpha = true
+        }
+      })
     }
 
     playLamps() {
