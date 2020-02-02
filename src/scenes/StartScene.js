@@ -5,15 +5,21 @@ export default class StartScene extends Phaser.Scene {
     }
 
     preload() {
-            this.load.audio('bgmusic', [
+        let songLoader = this.load.audio('bgmusic', [
             require("../assets/audio/dark.ogg"),
             require("../assets/audio/dark.mp3")
         ]);
+        songLoader.on('filecomplete', () => this.playMusic() );
+    }
+
+    playMusic() {
+        var music = this.sound.add('bgmusic');
+        music.play();
+        music.loop = true;
     }
 
     create() {
-        var music = this.sound.add('bgmusic');
-        music.play();
+        
         // title
         this.add.text(250, 100, 'Flat_lux', {font: "78px Arial", fill: "white"});
         this.add.text(250, 200, 'A journey on light.', {font: "36px Arial", fill: "yellow"});
