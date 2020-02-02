@@ -16,7 +16,16 @@ export default class GameScene extends Phaser.Scene {
         this.load.tilemapTiledJSON("map", townmap);
         this.load.atlas("atlas", atlas, atlasJSON);
         this.load.atlas("light", light, lightJSON);
+        this.load.audio('fix', [
+          require("../assets/audio/fixing.ogg"),
+          require("../assets/audio/fixing.mp3")
+        ]);
       }
+    playMusic() {
+        var music = this.sound.add('fix');
+        music.play();
+        music.loop = false;
+    }
       
     create() {
         //Load map and the tileset
@@ -38,6 +47,12 @@ export default class GameScene extends Phaser.Scene {
         // aboveLayer.setDepth(10);
         //Add player to the game
         const spawnPoint = map.findObject("Objects", obj => obj.name === "Spawn Point");
+        const ending = map.findObject("Objects", obj => obj.name === "End Point");
+
+        this.ending = this.physics.add
+        .sprite(ending.x-300, ending.y)
+        .setSize(600, 600)
+        .setOffset(0, 24);
         
         this.player = this.physics.add
         .sprite(spawnPoint.x, spawnPoint.y, "atlas", "misa-front")
@@ -124,7 +139,11 @@ export default class GameScene extends Phaser.Scene {
 
         //create lamps
         this.createLamps();
+
         this.physics.add.collider(this.player, this.lampPoints, (player, lamp) => this.handleLampDiscovery(player, lamp));
+       
+        this.physics.add.collider(this.player, this.ending, () => this.scene.start("End"));
+
         // creating light animation
         anims.create({
             key: "light",
@@ -183,7 +202,7 @@ export default class GameScene extends Phaser.Scene {
             this.player.body.setVelocityX(speed);
         }
 
-        this.playLamps();
+        //this.playLamps();
       
         // Vertical movement
         if (this.cursors.up.isDown) {
@@ -217,16 +236,17 @@ export default class GameScene extends Phaser.Scene {
         key: "light",
         frame: "lamp1.png"
       })
-      this.physics.world.enable(lampPoints);
       for (let i = 0; i < lampPoints.length; i++) {
         lampPoints[i].setData("on", true);
-        lampPoints[i].body.setImmovable();
       }
+      console.log(this.map);
+      // console.log(lampPoints);
       this.lampPoints = lampPoints;
     }
 
     handleLampDiscovery(player, lamp) {
       if (!lamp.tweenPlaying) {
+        this.playMusic();
         lamp.tweenPlaying = true;
         let newSpotLight = this.make.graphics();
         //  Create a hash shape Graphics object
@@ -253,9 +273,9 @@ export default class GameScene extends Phaser.Scene {
     }
 
     playLamps() {
-      for (let i = 0; i < this.lampPoints.length; i++) {
-        if (this.lampPoints[i].getData('on')) {
-          this.lampPoints[i].anims.play("light", true);
+      for (let i = 0; i < lampPoints.length; i++) {
+        if (lampPoints[i].on) {
+          lampPoints.anims.play("light", true);
         }
       }
     }
