@@ -8,9 +8,9 @@ export default class StartScene extends Phaser.Scene {
     }
 
     preload() {
-        let songLoader = this.load.audio('bgmusic', '../assets/sounds/fixing.mp3');
-        //songLoader.on('filecomplete', () => this.sound.add('bgmusic').play());
-        //songLoader.start();
+        let songLoader = this.load.audio('bgmusic', ['../assets/sounds/dark.mp3', '../assets/sounds/dark.ogg'], {instances:2});
+        songLoader.on('filecomplete', () => this.sound.add('bgmusic').play());
+        songLoader.start();
     }
 
     create() {
