@@ -5,7 +5,7 @@ export default class StartScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio('bgmusic', [
+            this.load.audio('bgmusic', [
             require("../assets/audio/dark.ogg"),
             require("../assets/audio/dark.mp3")
         ]);
